@@ -1,5 +1,5 @@
 
-package algo.com.fono.model;
+package algo.com.fono.data;
 
 public class Device {
 

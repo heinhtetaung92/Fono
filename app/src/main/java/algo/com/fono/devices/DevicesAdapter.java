@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import algo.com.fono.R;
-import algo.com.fono.model.Device;
+import algo.com.fono.data.Device;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 

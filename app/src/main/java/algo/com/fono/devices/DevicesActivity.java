@@ -8,16 +8,21 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 import algo.com.fono.R;
+import algo.com.fono.ViewModelFactory;
 import algo.com.fono.devicedetail.DeviceDetailActivity;
 import algo.com.fono.utily.ActivityUtils;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 public class DevicesActivity extends AppCompatActivity implements DevicesFragment.OnFragmentInteractionListener {
 
     private DrawerLayout mDrawerLayout;
+
+    private DevicesViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,7 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
         setupToolbar();
         setupNavigationDrawer();
         setupViewFragment();
+        mViewModel = obtainViewModel(this);
 
     }
 
@@ -64,11 +70,20 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
                 });
     }
 
+    public static DevicesViewModel obtainViewModel(FragmentActivity activity) {
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+
+        DevicesViewModel viewModel =
+                ViewModelProviders.of(activity, factory).get(DevicesViewModel.class);
+
+        return viewModel;
+    }
+
     private void setupViewFragment() {
         DevicesFragment devicesFragment =
                 (DevicesFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (devicesFragment == null) {
-            // Create the fragment
             devicesFragment = DevicesFragment.newInstance();
             ActivityUtils.replaceFragmentInActivity(
                     getSupportFragmentManager(), devicesFragment, R.id.contentFrame);

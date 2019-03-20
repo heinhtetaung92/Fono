@@ -1,10 +1,9 @@
 package algo.com.fono.devices;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
-import algo.com.fono.model.Device;
+import algo.com.fono.data.Device;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class DevicesFragment extends Fragment {
 
     private static final int DATASET_COUNT = 60;
+
+    private DevicesViewModel mDevicesViewModel;
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,23 +51,22 @@ public class DevicesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_devices, container, false);
 
-        mRecyclerView = rootView.findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mDevicesViewModel = DevicesActivity.obtainViewModel(getActivity());
 
-        mAdapter = new DevicesAdapter(mDataset);
-        mAdapter.setListener(mListener);
-        // Set CustomAdapter as the adapter for RecyclerView.
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView = rootView.findViewById(R.id.recyclerView);
+        setupRecyclerView();
 
         return rootView;
     }
 
-//    public void onDeviceSelected(int deviceId) {
-//        if (mListener != null) {
-//            mListener.onDeviceSelected(deviceId);
-//        }
-//    }
+    private void setupRecyclerView() {
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+        mAdapter = new DevicesAdapter(mDataset);
+        mAdapter.setListener(mListener);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
     private void initDataset() {
         mDataset = new ArrayList<>();

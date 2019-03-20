@@ -22,6 +22,8 @@ import algo.com.fono.R;
  */
 public class DeviceDetailFragment extends Fragment {
 
+    private DeviceDetailViewModel mDeviceDetailModel;
+
     private OnFragmentInteractionListener mListener;
 
     public DeviceDetailFragment() {
@@ -41,8 +43,11 @@ public class DeviceDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_device_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_device_detail, container, false);
+
+        mDeviceDetailModel = DeviceDetailActivity.obtainViewModel(getActivity());
+
+        return rootView;
     }
 
     @Override
