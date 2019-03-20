@@ -1,5 +1,6 @@
 package algo.com.fono.devices;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -7,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 import algo.com.fono.R;
+import algo.com.fono.devicedetail.DeviceDetailActivity;
 import algo.com.fono.utily.ActivityUtils;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,15 +53,6 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-//                            case R.id.list_navigation_menu_item:
-//                                // Do nothing, we're already on that screen
-//                                break;
-//                            case R.id.statistics_navigation_menu_item:
-//                                //todo add explicit intent
-////                                Intent intent =
-////                                        new Intent(TasksActivity.this, StatisticsActivity.class);
-////                                startActivity(intent);
-//                                break;
                             default:
                                 break;
                         }
@@ -84,6 +77,7 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
 
     @Override
     public void onDeviceSelected(int deviceId) {
-        Toast.makeText(this, "Opps! U clicked something", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, DeviceDetailActivity.class);
+        startActivity(intent);
     }
 }
