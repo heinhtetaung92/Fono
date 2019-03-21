@@ -23,8 +23,6 @@ public class DevicesFragment extends Fragment {
 
     private DevicesViewModel mDevicesViewModel;
 
-    private OnFragmentInteractionListener mListener;
-
     protected RecyclerView mRecyclerView;
     protected DevicesAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -63,7 +61,12 @@ public class DevicesFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
 
         mAdapter = new DevicesAdapter(mDataset);
-        mAdapter.setListener(mListener);
+        mAdapter.setListener(new OnItemClickListener() {
+            @Override
+            public void onItemClicked(int deviceId) {
+                mDevicesViewModel.openDeviceDetail(deviceId);
+            }
+        });
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -75,24 +78,8 @@ public class DevicesFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public interface OnItemClickListener {
+        void onItemClicked(int deviceId);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onDeviceSelected(int deviceId);
-    }
 }

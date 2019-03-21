@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Device> deviceList;
-    private DevicesFragment.OnFragmentInteractionListener mListener;
+    private DevicesFragment.OnItemClickListener mListener;
 
     public DevicesAdapter(List<Device> mDataset) {
         setDataSet(mDataset);
@@ -42,7 +42,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onDeviceSelected(curDevice.getId());
+                    mListener.onItemClicked(curDevice.getId());
                 }
             }
         });
@@ -54,8 +54,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return deviceList.size();
     }
 
-    public void setListener(DevicesFragment.OnFragmentInteractionListener mListener) {
-        this.mListener = mListener;
+    public void setListener(DevicesFragment.OnItemClickListener listener) {
+        this.mListener = listener;
     }
 
     public void setDataSet(List<Device> dataSet) {

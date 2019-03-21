@@ -14,7 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class DeviceDetailActivity extends AppCompatActivity implements DeviceDetailFragment.OnFragmentInteractionListener {
+public class DeviceDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_DEVICE_ID = "DEVICE_ID";
     private DeviceDetailViewModel mDeviceDetailModel;
@@ -72,8 +72,4 @@ public class DeviceDetailActivity extends AppCompatActivity implements DeviceDet
         return ViewModelProviders.of(activity, factory).get(DeviceDetailViewModel.class);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

@@ -3,10 +3,10 @@ package algo.com.fono.devices;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import algo.com.fono.Event;
 import algo.com.fono.R;
 import algo.com.fono.ViewModelFactory;
 import algo.com.fono.devicedetail.DeviceDetailActivity;
@@ -16,9 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-public class DevicesActivity extends AppCompatActivity implements DevicesFragment.OnFragmentInteractionListener {
+public class DevicesActivity extends AppCompatActivity implements DeviceItemNavigator {
 
     private DrawerLayout mDrawerLayout;
 
@@ -33,6 +34,16 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
         setupNavigationDrawer();
         setupViewFragment();
         mViewModel = obtainViewModel(this);
+
+        mViewModel.getOpenDeviceEvent().observeForever(new Observer<Event<Integer>>() {
+            @Override
+            public void onChanged(Event<Integer> event) {
+                Integer deviceId = event.getContentIfNotHandled();
+                if (deviceId != null) {
+                    openDeviceDetails(deviceId);
+                }
+            }
+        });
 
     }
 
@@ -91,9 +102,10 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
     }
 
     @Override
-    public void onDeviceSelected(int deviceId) {
+    public void openDeviceDetails(int deviceId) {
         Intent intent = new Intent(this, DeviceDetailActivity.class);
         intent.putExtra(DeviceDetailActivity.EXTRA_DEVICE_ID, deviceId);
         startActivity(intent);
     }
+
 }
