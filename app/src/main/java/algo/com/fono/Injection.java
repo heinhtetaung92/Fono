@@ -19,6 +19,7 @@ package algo.com.fono;
 import android.content.Context;
 
 import algo.com.fono.data.source.DevicesRepository;
+import algo.com.fono.data.source.remote.DevicesRemoteDataSource;
 import androidx.annotation.NonNull;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,10 +28,7 @@ public class Injection {
 
     public static DevicesRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
-        return new DevicesRepository();
 //        ToDoDatabase database = ToDoDatabase.getInstance(context);
-//        return TasksRepository.getInstance(FakeTasksRemoteDataSource.getInstance(),
-//                TasksLocalDataSource.getInstance(new AppExecutors(),
-//                        database.taskDao()));
+        return DevicesRepository.getInstance(DevicesRemoteDataSource.getInstance());
     }
 }

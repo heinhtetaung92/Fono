@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import algo.com.fono.R;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,11 +39,21 @@ public class DevicesFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        initDataset();
+    public void onResume() {
+        super.onResume();
+        mDevicesViewModel.start();
+        mDevicesViewModel.getItems().observeForever(new Observer<List<Device>>() {
+            @Override
+            public void onChanged(List<Device> devices) {
+                mDataset = devices;
+                if (mAdapter != null) {
+                    mAdapter.setDataSet(mDataset);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,13 +80,6 @@ public class DevicesFragment extends Fragment {
         });
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    private void initDataset() {
-        mDataset = new ArrayList<>();
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset.add(new Device(i));
-        }
     }
 
     public interface OnItemClickListener {

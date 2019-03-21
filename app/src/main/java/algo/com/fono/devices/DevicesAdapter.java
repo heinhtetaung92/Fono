@@ -1,9 +1,12 @@
 package algo.com.fono.devices;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
         });
-        vh.setIdView(curDevice.getId());
+        vh.setDeviceName(curDevice.getDeviceName());
+        vh.setDeviceBrand(curDevice.getBrand());
     }
 
     @Override
@@ -68,15 +72,24 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView idView;
+        private TextView deviceName, deviceBrand;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            idView = itemView.findViewById(R.id.show_id);
+            deviceName = itemView.findViewById(R.id.device_name);
+            deviceBrand = itemView.findViewById(R.id.device_brand);
         }
 
-        void setIdView(int id) {
-            idView.setText(String.valueOf(id));
+        void setDeviceName(String name) {
+            if (!TextUtils.isEmpty(name)) {
+                deviceName.setText(name);
+            }
+        }
+
+        void setDeviceBrand(String brand) {
+            if (!TextUtils.isEmpty(brand)) {
+                deviceBrand.setText(brand);
+            }
         }
 
         void setOnClickListener(View.OnClickListener listener) {

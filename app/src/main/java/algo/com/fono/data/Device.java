@@ -49,11 +49,26 @@ public class Device {
     private String _3gBands;
     private String _4gBands;
 
+    public Device(String deviceName, String brand, String technology, int id) {
+        this.deviceName = deviceName;
+        this.brand = brand;
+        this.technology = technology;
+        this._id = id;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
     public Device(int i) {
         this._id = i;
     }
 
-   public int getId() {
-      return _id;
-   }
+    public int getId() {
+        return _id;
+    }
 }
