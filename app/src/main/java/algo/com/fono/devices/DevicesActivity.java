@@ -93,6 +93,7 @@ public class DevicesActivity extends AppCompatActivity implements DevicesFragmen
     @Override
     public void onDeviceSelected(int deviceId) {
         Intent intent = new Intent(this, DeviceDetailActivity.class);
+        intent.putExtra(DeviceDetailActivity.EXTRA_DEVICE_ID, deviceId);
         startActivity(intent);
     }
 }

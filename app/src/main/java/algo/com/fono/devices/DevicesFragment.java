@@ -71,7 +71,7 @@ public class DevicesFragment extends Fragment {
     private void initDataset() {
         mDataset = new ArrayList<>();
         for (int i = 0; i < DATASET_COUNT; i++) {
-            mDataset.add(new Device());
+            mDataset.add(new Device(i));
         }
     }
 

@@ -12,9 +12,11 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class DeviceDetailActivity extends AppCompatActivity implements DeviceDetailFragment.OnFragmentInteractionListener {
 
+    public static final String EXTRA_DEVICE_ID = "DEVICE_ID";
     private DeviceDetailViewModel mDeviceDetailModel;
 
     @Override
@@ -25,9 +27,14 @@ public class DeviceDetailActivity extends AppCompatActivity implements DeviceDet
         setupToolbar();
         setupViewFragment();
         mDeviceDetailModel = obtainViewModel(this);
+        showDeviceID();
 
     }
 
+    private void showDeviceID() {
+        int id = getIntent().getExtras().getInt(EXTRA_DEVICE_ID);
+        Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+    }
 
     private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -3,49 +3,57 @@ package algo.com.fono.data;
 
 public class Device {
 
-    public String deviceName;
-    public String brand;
-    public String technology;
-    public String gprs;
-    public String edge;
-    public String announced;
-    public String status;
-    public String dimensions;
-    public String weight;
-    public String sim;
-    public String type;
-    public String size;
-    public String resolution;
-    public String displayC;
-    public String cardSlot;
-    public String alertTypes;
-    public String loudspeaker;
-    public String soundC;
-    public String wlan;
-    public String bluetooth;
-    public String gps;
-    public String radio;
-    public String usb;
-    public String messaging;
-    public String browser;
-    public String featuresC;
-    public String batteryC;
-    public String colors;
-    public String sensors;
-    public String cpu;
-    public String internal;
-    public String os;
-    public String speed;
-    public String networkC;
-    public String chipset;
-    public String features;
-    public String gpu;
-    public String multitouch;
-    public String price;
-    public String single;
-    public String _2gBands;
-    public String _35mmJack;
-    public String _3gBands;
-    public String _4gBands;
+    private int _id;
+    private String deviceName;
+    private String brand;
+    private String technology;
+    private String gprs;
+    private String edge;
+    private String announced;
+    private String status;
+    private String dimensions;
+    private String weight;
+    private String sim;
+    private String type;
+    private String size;
+    private String resolution;
+    private String displayC;
+    private String cardSlot;
+    private String alertTypes;
+    private String loudspeaker;
+    private String soundC;
+    private String wlan;
+    private String bluetooth;
+    private String gps;
+    private String radio;
+    private String usb;
+    private String messaging;
+    private String browser;
+    private String featuresC;
+    private String batteryC;
+    private String colors;
+    private String sensors;
+    private String cpu;
+    private String internal;
+    private String os;
+    private String speed;
+    private String networkC;
+    private String chipset;
+    private String features;
+    private String gpu;
+    private String multitouch;
+    private String price;
+    private String single;
+    private String _2gBands;
+    private String _35mmJack;
+    private String _3gBands;
+    private String _4gBands;
 
+    public Device(int i) {
+        this._id = i;
+    }
+
+   public int getId() {
+      return _id;
+   }
 }

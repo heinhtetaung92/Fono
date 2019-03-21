@@ -3,6 +3,7 @@ package algo.com.fono.devices;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,24 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_device_row, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
-        vh.setOnClickListener(mListener);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
+        ViewHolder vh = (ViewHolder) holder;
+        final Device curDevice = deviceList.get(position);
+
+        vh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onDeviceSelected(curDevice.getId());
+                }
+            }
+        });
+        vh.setIdView(curDevice.getId());
     }
 
     @Override
@@ -57,20 +68,21 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView idView;
+
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            idView = itemView.findViewById(R.id.show_id);
         }
 
-        void setOnClickListener(final DevicesFragment.OnFragmentInteractionListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   if (listener != null) {
-                       listener.onDeviceSelected(3);
-                   }
-                }
-            });
+        void setIdView(int id) {
+            idView.setText(String.valueOf(id));
+        }
+
+        void setOnClickListener(View.OnClickListener listener) {
+            if (listener != null) {
+                itemView.setOnClickListener(listener);
+            }
         }
 
     }
