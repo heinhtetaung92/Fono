@@ -23,6 +23,6 @@ public interface DevicesDataSource {
 
     void getDevices(@NonNull LoadDevicesCallback callback);
 
-    void getDevice(@NonNull String DeviceId, @NonNull GetDeviceCallback callback);
+    void getDevice(@NonNull int DeviceId, @NonNull GetDeviceCallback callback);
 
 }

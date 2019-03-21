@@ -46,13 +46,17 @@ public class DevicesRepository implements DevicesDataSource {
     }
 
     @Override
-    public void getDevice(@NonNull String deviceId, @NonNull final GetDeviceCallback callback) {
+    public void getDevice(@NonNull int deviceId, @NonNull final GetDeviceCallback callback) {
         checkNotNull(callback);
 
         mDevicesLocalDataSource.getDevice(deviceId, new GetDeviceCallback() {
             @Override
             public void onDeviceLoaded(Device device) {
-                callback.onDeviceLoaded(device);
+                if (device != null) {
+                    callback.onDeviceLoaded(device);
+                } else {
+                    callback.onDataNotAvailable();
+                }
             }
 
             @Override

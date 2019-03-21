@@ -73,7 +73,7 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
     }
 
     @Override
-    public void getDevice(@NonNull String deviceId, @NonNull final GetDeviceCallback callback) {
+    public void getDevice(@NonNull int deviceId, @NonNull final GetDeviceCallback callback) {
         final Device device = DEVICES_SERVICE_DATA.get(deviceId);
 
         // Simulate network by delaying the execution.

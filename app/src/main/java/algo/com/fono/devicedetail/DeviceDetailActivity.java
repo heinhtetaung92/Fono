@@ -27,13 +27,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
         setupToolbar();
         setupViewFragment();
         mDeviceDetailModel = obtainViewModel(this);
-        showDeviceID();
 
-    }
-
-    private void showDeviceID() {
-        int id = getIntent().getExtras().getInt(EXTRA_DEVICE_ID);
-        Toast.makeText(this, String.valueOf(id), Toast.LENGTH_SHORT).show();
     }
 
     private void setupToolbar() {
@@ -59,7 +53,8 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 .findFragmentById(R.id.contentFrame);
 
         if (deviceDetailFragment == null) {
-            deviceDetailFragment = DeviceDetailFragment.newInstance();
+            int deviceId = getIntent().getExtras().getInt(EXTRA_DEVICE_ID);
+            deviceDetailFragment = DeviceDetailFragment.newInstance(deviceId);
         }
         return deviceDetailFragment;
     }
