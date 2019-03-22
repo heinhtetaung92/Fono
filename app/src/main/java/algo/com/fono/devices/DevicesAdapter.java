@@ -21,8 +21,8 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<Device> deviceList;
     private DevicesFragment.OnItemClickListener mListener;
 
-    public DevicesAdapter(List<Device> mDataset) {
-        setDataSet(mDataset);
+    public DevicesAdapter() {
+        deviceList = new ArrayList<>();
     }
 
     @NonNull
@@ -68,6 +68,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             this.deviceList = new ArrayList<>();
         }
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

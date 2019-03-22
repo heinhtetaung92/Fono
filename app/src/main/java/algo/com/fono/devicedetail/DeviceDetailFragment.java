@@ -41,13 +41,6 @@ public class DeviceDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_device_detail, container, false);
 
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDeviceDetailModel.setFakeDevice();
-            }
-        });
-
         mDeviceDetailModel = DeviceDetailActivity.obtainViewModel(getActivity());
 
         final FragmentDeviceDetailBinding binding = FragmentDeviceDetailBinding.bind(rootView);
