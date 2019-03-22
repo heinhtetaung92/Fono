@@ -1,5 +1,7 @@
 package algo.com.fono.devicedetail;
 
+import android.util.Log;
+
 import algo.com.fono.data.Device;
 import algo.com.fono.data.source.DevicesDataSource;
 import algo.com.fono.data.source.DevicesRepository;
@@ -20,7 +22,7 @@ public class DeviceDetailViewModel extends ViewModel implements DevicesDataSourc
         mRepository.getDevice(deviceId, this);
     }
 
-    private void setDevice(Device device) {
+    public void setDevice(Device device) {
         mDevice.setValue(device);
     }
 
@@ -36,5 +38,9 @@ public class DeviceDetailViewModel extends ViewModel implements DevicesDataSourc
     @Override
     public void onDataNotAvailable() {
 
+    }
+
+    public void setFakeDevice() {
+        setDevice(new Device("Oneplus", "OnePlus 6t", "Oxygen", 99));
     }
 }

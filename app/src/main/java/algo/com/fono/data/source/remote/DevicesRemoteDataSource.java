@@ -53,7 +53,8 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
     }
 
     // Prevent direct instantiation.
-    private DevicesRemoteDataSource() {}
+    private DevicesRemoteDataSource() {
+    }
 
     private static void addDevice(String name, String brand, String technology, int id) {
         Device newDevice = new Device(name, brand, technology, id);
