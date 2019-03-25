@@ -16,6 +16,7 @@ import algo.com.fono.data.source.DevicesDataSource;
 import algo.com.fono.di.components.DaggerDevicesApiComponent;
 import algo.com.fono.di.components.DevicesApiComponent;
 import algo.com.fono.di.modules.ContextModule;
+import algo.com.fono.utily.Constants;
 import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,7 +84,7 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
     @Override
     public void getDevices(@NonNull final LoadDevicesCallback callback) {
 
-        devicesApi.getDevicesList().enqueue(new Callback<List<Device>>() {
+        devicesApi.getDevicesList(10, Constants.API_TOKEN).enqueue(new Callback<List<Device>>() {
             @Override
             public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
                 Timber.i(response.message());
