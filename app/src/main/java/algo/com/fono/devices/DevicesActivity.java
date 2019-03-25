@@ -2,7 +2,9 @@ package algo.com.fono.devices;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -11,9 +13,11 @@ import algo.com.fono.R;
 import algo.com.fono.ViewModelFactory;
 import algo.com.fono.devicedetail.DeviceDetailActivity;
 import algo.com.fono.utily.ActivityUtils;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -106,6 +110,19 @@ public class DevicesActivity extends AppCompatActivity implements DeviceItemNavi
         Intent intent = new Intent(this, DeviceDetailActivity.class);
         intent.putExtra(DeviceDetailActivity.EXTRA_DEVICE_ID, deviceId);
         startActivity(intent);
+    }
+
+    @RequiresApi(28)
+    private static class OnUnhandledKeyEventListenerWrapper implements View.OnUnhandledKeyEventListener {
+        private ViewCompat.OnUnhandledKeyEventListenerCompat mCompatListener;
+
+        OnUnhandledKeyEventListenerWrapper(ViewCompat.OnUnhandledKeyEventListenerCompat listener) {
+            this.mCompatListener = listener;
+        }
+
+        public boolean onUnhandledKeyEvent(View v, KeyEvent event) {
+            return this.mCompatListener.onUnhandledKeyEvent(v, event);
+        }
     }
 
 }

@@ -2,12 +2,14 @@ package algo.com.fono.data.source.remote;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import com.google.common.collect.Lists;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 import algo.com.fono.data.Device;
 import algo.com.fono.data.source.DevicesDataSource;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class DevicesRemoteDataSource implements DevicesDataSource {
 
@@ -83,12 +86,12 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
         devicesApi.getDevicesList().enqueue(new Callback<List<Device>>() {
             @Override
             public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
-
+                Timber.i(response.message());
             }
 
             @Override
             public void onFailure(Call<List<Device>> call, Throwable t) {
-
+                Timber.i(t.getMessage());
             }
         });
 

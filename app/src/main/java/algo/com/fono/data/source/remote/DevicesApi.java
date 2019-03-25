@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 
 public interface DevicesApi {
 
-    @GET
+    @GET("/v1/")
     Call<List<Device>> getDevicesList();
 
 }
