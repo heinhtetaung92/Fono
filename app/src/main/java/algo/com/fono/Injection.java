@@ -30,6 +30,6 @@ public class Injection {
     public static DevicesRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
 //        ToDoDatabase database = ToDoDatabase.getInstance(context);
-        return DevicesRepository.getInstance(DevicesRemoteDataSource.getInstance());
+        return DevicesRepository.getInstance(DevicesRemoteDataSource.getInstance(context));
     }
 }

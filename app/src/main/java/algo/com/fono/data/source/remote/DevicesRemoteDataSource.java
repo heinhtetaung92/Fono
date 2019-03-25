@@ -1,15 +1,23 @@
 package algo.com.fono.data.source.remote;
 
+import android.content.Context;
 import android.os.Handler;
 
 import com.google.common.collect.Lists;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import algo.com.fono.data.Device;
 import algo.com.fono.data.source.DevicesDataSource;
+import algo.com.fono.di.components.DaggerDevicesApiComponent;
+import algo.com.fono.di.components.DevicesApiComponent;
+import algo.com.fono.di.modules.ContextModule;
 import androidx.annotation.NonNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DevicesRemoteDataSource implements DevicesDataSource {
 
@@ -18,6 +26,8 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
     private static final int SERVICE_LATENCY_IN_MILLIS = 2000;
 
     private final static Map<Integer, Device> DEVICES_SERVICE_DATA;
+
+    DevicesApi devicesApi;
 
     static {
         DEVICES_SERVICE_DATA = new LinkedHashMap<>(2);
@@ -45,15 +55,21 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
         addDevice("Apple", "Iphone9", "", 21);
     }
 
-    public static DevicesRemoteDataSource getInstance() {
+    public static DevicesRemoteDataSource getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = new DevicesRemoteDataSource();
+            INSTANCE = new DevicesRemoteDataSource(context);
         }
         return INSTANCE;
     }
 
     // Prevent direct instantiation.
-    private DevicesRemoteDataSource() {
+    private DevicesRemoteDataSource(Context context) {
+        DevicesApiComponent devicesApiComponent = DaggerDevicesApiComponent.builder()
+                .contextModule(new ContextModule(context))
+                .build();
+
+
+        devicesApi = devicesApiComponent.getDevicesApiService();
     }
 
     private static void addDevice(String name, String brand, String technology, int id) {
@@ -63,6 +79,19 @@ public class DevicesRemoteDataSource implements DevicesDataSource {
 
     @Override
     public void getDevices(@NonNull final LoadDevicesCallback callback) {
+
+        devicesApi.getDevicesList().enqueue(new Callback<List<Device>>() {
+            @Override
+            public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Device>> call, Throwable t) {
+
+            }
+        });
+
         // Simulate network by delaying the execution.
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
